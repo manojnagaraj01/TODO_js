@@ -1,0 +1,164 @@
+var parent = document.getElementById("parent")
+var cardcontainer = document.getElementById("card_container")
+var cardName = document.getElementById("cardname")
+var addTaskPopup = document.getElementById("addTaskPopup")
+var container = document.getElementById("container")
+var notask = document.getElementById("notask")
+var additemPopup = document.getElementById("additemPopup")
+var singlecard = document.getElementById("singlecard")
+var topHead = document.getElementById("top_head")
+var cardNameHead = document.getElementById("cardname_head")
+
+//add task button
+function showAddTask(){
+    addTaskPopup.classList.remove("hide")
+    parent.classList.add("blur")
+}
+function closeAddTask(){
+    addTaskPopup.classList.add("hide")
+    parent.classList.remove("blur")
+    
+}
+
+//
+function addCard(){
+    notask.classList.add("hide")
+    closeAddTask()
+    //create elements
+    let card = document.createElement("div")
+    let cardHeading = document.createElement("h3")
+    let line = document.createElement("hr")
+    let itemList = document.createElement("div")
+    let cardButton = document.createElement('div')
+    let addItem = document.createElement("button")
+    let deleteCard = document.createElement("button")
+
+
+    //append child
+    cardcontainer.appendChild(card)
+    card.appendChild(cardHeading)
+    card.appendChild(line)
+    card.appendChild(itemList)
+    card.appendChild(cardButton)
+    cardButton.appendChild(addItem)
+    cardButton.appendChild(deleteCard)
+
+    //give values
+    cardHeading.innerText = cardName.value
+    cardHeading.style.color="crimson"
+    cardName.value = ""  //clearing the popup input
+    itemList.classList.add('itemlist')
+    cardButton.classList.add('card_buttons')
+    addItem.innerText = "+"
+    deleteCard.innerText = "-"
+    addItem.style.backgroundColor="green"
+    deleteCard.style.backgroundColor="red"
+
+    //classes over here
+    card.classList.add("card")
+     
+    //delete button
+    deleteCard.addEventListener("click", function(){
+        card.remove()
+        if(cardcontainer.innerText ===''){
+            notask.classList.remove('hide')
+        }
+    })
+
+    //add item
+    addItem.addEventListener("click", function(event){
+        
+        additemPopup.classList.remove('hide')
+        parent.classList.add('blur')
+        //create elements
+        let itemPopupHeading = document.createElement("h3")
+        let inputCenter = document.createElement('center')
+        let itemName = document.createElement("input")
+        let buttonSpace = document.createElement('div')
+        let addButton = document.createElement("button")
+        let closeButton= document.createElement("button")
+
+        //append elemets
+        additemPopup.appendChild(itemPopupHeading)
+        additemPopup.appendChild(inputCenter)
+        inputCenter.appendChild(itemName)
+        additemPopup.appendChild(buttonSpace)
+        buttonSpace.appendChild(addButton)
+        buttonSpace.appendChild(closeButton)
+
+        //give element values
+        additemPopup.classList.add('box')
+        itemPopupHeading.innerText = "add task"
+        buttonSpace.classList.add('buttons')
+        itemName.classList.add('input')
+        itemName.classList.add('center')
+        addButton.classList.add('add_button')
+        closeButton.classList.add('close_button')
+        addButton.innerText = "add"
+        closeButton.innerText = "close"
+       
+        
+        
+        
+        // closeButton.addEventListener('click', function(){
+        //     additemPopup.classList.add('hide')
+        //     parent.classList.remove("blur")
+        // })
+        
+
+        addButton.addEventListener('click', ()=>{
+            additemPopup.classList.add('hide')
+            parent.classList.remove('blur')
+
+            //creating ite elements
+            let item = document.createElement('div')
+            let itemText = document.createElement('span')
+            let markDone = document.createElement('button')
+
+            //append child
+            item.appendChild(itemText)
+            item.appendChild(markDone)
+
+            // values
+            itemText.innerText = itemName.value
+            markDone.innerText = "Mark Done"
+            item.style.backgroundColor="white"
+            itemText.style.backgroundColor="white"
+            markDone.classList.add('markdonebutton')
+
+            //appending the item to item list
+            itemList.appendChild(item)
+            additemPopup.innerText =""
+
+            markDone.addEventListener('click', function(){
+                itemText.classList.add('markDone')
+                markDone.classList.add('hide')
+            })
+
+
+        })
+    })
+
+    cardHeading.addEventListener('click' , function(){
+        cardNameHead.classList.remove('hide')
+        cardNameHead.innerText = cardHeading.innerText
+        singlecard.classList.remove('hide')
+        cardcontainer.classList.add('hide')
+        let copyCard = card.cloneNode(true)
+        singlecard.appendChild(copyCard)
+        parent.firstElementChild.classList.remove("hide")
+        topHead.classList.add('hide')
+    })
+    
+
+}
+
+function back(){
+    cardNameHead.classList.add('hide')
+    topHead.classList.remove('hide')
+    parent.firstElementChild.classList.add("hide")
+    singlecard.classList.add('hide')
+    cardcontainer.classList.remove('hide')
+    singlecard.innerText = ''
+}
+
