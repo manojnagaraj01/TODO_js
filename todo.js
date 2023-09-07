@@ -43,8 +43,8 @@ function addCard(){
     card.appendChild(line)
     card.appendChild(itemList)
     card.appendChild(cardButton)
-    cardButton.appendChild(iconadd)
-    cardButton.appendChild(icondelete)
+    card.appendChild(iconadd)
+    card.appendChild(icondelete)
     //iconadd.appendChild(addItem)
     //icondelete.appendChild(deleteCard)
    
@@ -54,9 +54,9 @@ function addCard(){
     cardHeading.style.color="crimson"
     cardName.value = ""  //clearing the popup input
     itemList.classList.add('itemlist')
-    cardButton.classList.add('card_buttons')
-    iconadd.classList.add("fa-solid","fa-plus")
-    icondelete.classList.add("fa-regular","fa-trash-can")
+    //cardButton.classList.add('card_buttons')
+    iconadd.classList.add("fa-solid","fa-plus", "plusButton")
+    icondelete.classList.add("fa-regular","fa-trash-can", "trashButton")
 
     //addItem.style.backgroundColor="green"
     //deleteCard.style.backgroundColor="red"
@@ -145,17 +145,77 @@ function addCard(){
         cardcontainer.classList.add('hide')
         let copyCard = card.cloneNode(true)
         singlecard.appendChild(copyCard)
-        // copyCard.lastElementChild.addEventListener("click", function(){
-        //     card.remove()
-        //     copyCard.remove()
-        //     if(cardcontainer.innerText ===''){
-        //         notask.classList.remove('hide')
-        //     }
-        //     back()
-        // })
-        // copyCard.lastElementChild.previousElementSibling.addEventListener("click", function(){
+        copyCard.lastElementChild.addEventListener("click", function(){
+            card.remove()
+            copyCard.remove()
+            if(cardcontainer.innerText ===''){
+                notask.classList.remove('hide')
+            }
+            back()
+        })
+        
+        copyCard.lastElementChild.previousElementSibling.addEventListener("click", function(){
             
-        // })
+            additemPopup.classList.remove('hide')
+            parent.classList.add('blur')
+            //create elements
+            let itemPopupHeading = document.createElement("h3")
+            let inputCenter = document.createElement('center')
+            let itemName = document.createElement("input")
+            let buttonSpace = document.createElement('div')
+            let addButton = document.createElement("button")
+            let closeButton= document.createElement("button")
+
+            //append elemets
+            additemPopup.appendChild(itemPopupHeading)
+            additemPopup.appendChild(inputCenter)
+            inputCenter.appendChild(itemName)
+            additemPopup.appendChild(buttonSpace)
+            buttonSpace.appendChild(addButton)
+            buttonSpace.appendChild(closeButton)
+
+            //give element values
+            additemPopup.classList.add('box')
+            itemPopupHeading.innerText = "add task"
+            buttonSpace.classList.add('buttons')
+            itemName.classList.add('input')
+            itemName.classList.add('center')
+            addButton.classList.add('add_button')
+            closeButton.classList.add('close_button')
+            addButton.innerText = "add"
+            closeButton.innerText = "close"
+            
+            addButton.addEventListener('click', ()=>{
+                additemPopup.classList.add('hide')
+                parent.classList.remove('blur')
+    
+                //creating ite elements
+                let item = document.createElement('div')
+                let itemText = document.createElement('span')
+                let markDone = document.createElement('button')
+    
+                //append child
+                item.appendChild(itemText)
+                item.appendChild(markDone)
+    
+                // values
+                itemText.innerText = itemName.value
+                markDone.innerText = "Mark Done"
+                item.style.backgroundColor="white"
+                itemText.style.backgroundColor="white"
+                markDone.classList.add('markdonebutton')
+    
+                //appending the item to item list
+                itemList.appendChild(item)
+                additemPopup.innerText =""
+    
+                markDone.addEventListener('click', function(){
+                    itemText.classList.add('markDone')
+                    markDone.classList.add('hide')
+                })
+    
+            })           
+        })
 
         parent.firstElementChild.classList.remove("hide")
         topHead.classList.add('hide')

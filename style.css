@@ -137,7 +137,7 @@ h3{
 
 /* card input area */
 .itemlist{
-    height: 200px;
+    /* height: 200px; */
     /* overflow: scroll; */
     display: grid;
     justify-content: center;
@@ -145,13 +145,13 @@ h3{
     background-color: white;
 }
 /* card buttons */
-.card_buttons{
+/* .card_buttons{
     display: flex;
     justify-content: end;
     align-items: end;
     gap: 15px;
-    background-color: white;
-}
+    background-color: peru;
+} */
 .markDone{
     text-decoration: line-through;
     color: red;
@@ -162,6 +162,17 @@ h3{
     border: none;
     border-radius: 10px;
     margin-left: 10px;
+}
+
+.trashButton{
+    background-color: peru;
+    margin-top: 50px;
+    margin-left: 20px;   
+}
+.plusButton{
+    background-color: peru;
+    margin-top: 50px;
+    margin-left: 130px;
 }
 .hide{
     display: none;
