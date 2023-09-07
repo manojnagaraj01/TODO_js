@@ -8,7 +8,8 @@ var additemPopup = document.getElementById("additemPopup")
 var singlecard = document.getElementById("singlecard")
 var topHead = document.getElementById("top_head")
 var cardNameHead = document.getElementById("cardname_head")
-
+var isSingle = false;
+ 
 //add task button
 function showAddTask(){
     addTaskPopup.classList.remove("hide")
@@ -30,8 +31,10 @@ function addCard(){
     let line = document.createElement("hr")
     let itemList = document.createElement("div")
     let cardButton = document.createElement('div')
-    let addItem = document.createElement("button")
-    let deleteCard = document.createElement("button")
+    //let addItem = document.createElement("button")
+    //let deleteCard = document.createElement("button")
+    let iconadd = document.createElement("i")
+    let icondelete = document.createElement("i")
 
 
     //append child
@@ -40,25 +43,29 @@ function addCard(){
     card.appendChild(line)
     card.appendChild(itemList)
     card.appendChild(cardButton)
-    cardButton.appendChild(addItem)
-    cardButton.appendChild(deleteCard)
-
+    cardButton.appendChild(iconadd)
+    cardButton.appendChild(icondelete)
+    //iconadd.appendChild(addItem)
+    //icondelete.appendChild(deleteCard)
+   
+   
     //give values
     cardHeading.innerText = cardName.value
     cardHeading.style.color="crimson"
     cardName.value = ""  //clearing the popup input
     itemList.classList.add('itemlist')
     cardButton.classList.add('card_buttons')
-    addItem.innerText = "+"
-    deleteCard.innerText = "-"
-    addItem.style.backgroundColor="green"
-    deleteCard.style.backgroundColor="red"
+    iconadd.classList.add("fa-solid","fa-plus")
+    icondelete.classList.add("fa-regular","fa-trash-can")
+
+    //addItem.style.backgroundColor="green"
+    //deleteCard.style.backgroundColor="red"
 
     //classes over here
     card.classList.add("card")
      
     //delete button
-    deleteCard.addEventListener("click", function(){
+    icondelete.addEventListener("click", function(){
         card.remove()
         if(cardcontainer.innerText ===''){
             notask.classList.remove('hide')
@@ -66,7 +73,7 @@ function addCard(){
     })
 
     //add item
-    addItem.addEventListener("click", function(event){
+    iconadd.addEventListener("click", function(event){
         
         additemPopup.classList.remove('hide')
         parent.classList.add('blur')
@@ -97,14 +104,7 @@ function addCard(){
         addButton.innerText = "add"
         closeButton.innerText = "close"
        
-        
-        
-        
-        // closeButton.addEventListener('click', function(){
-        //     additemPopup.classList.add('hide')
-        //     parent.classList.remove("blur")
-        // })
-        
+
 
         addButton.addEventListener('click', ()=>{
             additemPopup.classList.add('hide')
@@ -135,7 +135,6 @@ function addCard(){
                 markDone.classList.add('hide')
             })
 
-
         })
     })
 
@@ -146,6 +145,18 @@ function addCard(){
         cardcontainer.classList.add('hide')
         let copyCard = card.cloneNode(true)
         singlecard.appendChild(copyCard)
+        // copyCard.lastElementChild.addEventListener("click", function(){
+        //     card.remove()
+        //     copyCard.remove()
+        //     if(cardcontainer.innerText ===''){
+        //         notask.classList.remove('hide')
+        //     }
+        //     back()
+        // })
+        // copyCard.lastElementChild.previousElementSibling.addEventListener("click", function(){
+            
+        // })
+
         parent.firstElementChild.classList.remove("hide")
         topHead.classList.add('hide')
     })
