@@ -68,7 +68,12 @@
     transform: translate(-50%, -50%);
     border-radius: 10px;
 }
-              
+.inputparent{
+    display: flex;
+    justify-content: center;
+    background-color: white;
+} 
+
 .input{
     display: block;
     text-align: center;
@@ -124,7 +129,7 @@ center{
 }
 .card{
     width: 200px;
-    height: 300px;
+    height: 300px auto;
     border: 2px solid black;
     margin: 50px;
     background-color: white;
@@ -160,13 +165,18 @@ h3{
 }
 .trashButton{
     background-color: peru;
-    margin-top: 50px;
     margin-left: 20px;   
 }
 .plusButton{
     background-color: peru;
-    margin-top: 50px;
+    margin-top: 200px;
     margin-left: 130px;
+}
+
+/* single card */
+.single_card_parent{
+    display: flex;
+    justify-content: center;
 }
 
 .hide{
@@ -175,7 +185,8 @@ h3{
 
 @media screen and (max-width: 500px) and (min-width: 250px){
     .card{
-        margin: 50px 75px;
+        width: 80%;
+        margin: 50px;
     }
     .box{
         width: 80%;

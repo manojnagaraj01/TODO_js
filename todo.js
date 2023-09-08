@@ -8,7 +8,7 @@ var additemPopup = document.getElementById("additemPopup")
 var singlecard = document.getElementById("singlecard")
 var topHead = document.getElementById("top_head")
 var cardNameHead = document.getElementById("cardname_head")
-
+var afafafadf = document.getElementsByClassName
 
 //add task button
 function showAddTask(){
@@ -98,10 +98,7 @@ function addCard(){
         addButton.innerText = "add"
         closeButton.innerText = "close"
        
-        // closeButton.addEventListener('click', function(){
-        //     additemPopup.classList.add('hide')
-        //     parent.classList.remove('blur')
-        // })
+        //closeButton.addEventListener('mouseover')
         
 
         addButton.addEventListener('click', ()=>{
@@ -143,7 +140,6 @@ function addCard(){
         cardNameHead.innerText = cardHeading.innerText
         singlecard.classList.remove('hide')
         cardcontainer.classList.add('hide')
-        // isSingleCard = true
 
         //create copy of card
         let copyCard = card.cloneNode(true)
@@ -227,19 +223,21 @@ function addCard(){
                 })
                 
                 if(singlecard){
-
+                    let copylist= copyCard.querySelector("div")
                     let itemclone = item.cloneNode(true);
-                    copyCard.appendChild(itemclone);
+                    copylist.appendChild(itemclone);
 
+                    let markdoneClone = itemclone.querySelector('button');
+                    let itemtextClone = itemclone.querySelector('span');
+                    
 
-
-                    let markdoneClone = itemclone.querySelector('.markdonebutton');
-                    let itemtextClone = itemclone.querySelector('.span1');
-                
                     markdoneClone.addEventListener('click', function(){
                         itemtextClone.classList.add('markDone')
+                        itemText.classList.add('markDone')
+                        markDone.classList.add('hide')
                         markdoneClone.classList.add('hide')
                     })
+                    
 
                 }
                 

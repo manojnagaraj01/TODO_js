@@ -19,13 +19,17 @@
         </div>
         <h1 id="notask" class="">No items in todo list </h1>
         <div id="card_container" class="card_cont"></div>
-        <div id="singlecard" class="hide"></div>
+        <div class="single_card_parent">
+            <div id="singlecard" class="singlecard hide"></div>
+        </div>
     </div>
     <div class="main_box">
         <!-- add item popup -->
         <div class="box hide" id="addTaskPopup">
-            <center><h3 id="add_new_head">Add New List</h3></center>
-            <center class="center"><input type="text" id="cardname"  class="input" placeholder="Add New List"></center>
+            <h3 id="add_new_head">Add New List</h3>
+            <div class="inputparent">
+                <input type="text" id="cardname" class="input" placeholder="Add New List">
+            </div>
             <div class="buttons">
                 <button onclick="addCard()" id="add_button" class="add_button">Add</button>
                 <button onclick="closeAddTask()" id="close_button" class="close_button">Close</button>
