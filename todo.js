@@ -8,8 +8,8 @@ var additemPopup = document.getElementById("additemPopup")
 var singlecard = document.getElementById("singlecard")
 var topHead = document.getElementById("top_head")
 var cardNameHead = document.getElementById("cardname_head")
-var isSingle = false;
- 
+
+
 //add task button
 function showAddTask(){
     addTaskPopup.classList.remove("hide")
@@ -31,8 +31,6 @@ function addCard(){
     let line = document.createElement("hr")
     let itemList = document.createElement("div")
     let cardButton = document.createElement('div')
-    //let addItem = document.createElement("button")
-    //let deleteCard = document.createElement("button")
     let iconadd = document.createElement("i")
     let icondelete = document.createElement("i")
 
@@ -45,8 +43,6 @@ function addCard(){
     card.appendChild(cardButton)
     card.appendChild(iconadd)
     card.appendChild(icondelete)
-    //iconadd.appendChild(addItem)
-    //icondelete.appendChild(deleteCard)
    
    
     //give values
@@ -54,12 +50,9 @@ function addCard(){
     cardHeading.style.color="crimson"
     cardName.value = ""  //clearing the popup input
     itemList.classList.add('itemlist')
-    //cardButton.classList.add('card_buttons')
+    //card.classList.add('card_buttons')
     iconadd.classList.add("fa-solid","fa-plus", "plusButton")
     icondelete.classList.add("fa-regular","fa-trash-can", "trashButton")
-
-    //addItem.style.backgroundColor="green"
-    //deleteCard.style.backgroundColor="red"
 
     //classes over here
     card.classList.add("card")
@@ -73,7 +66,7 @@ function addCard(){
     })
 
     //add item
-    iconadd.addEventListener("click", function(event){
+    iconadd.addEventListener("click", function(){
         
         additemPopup.classList.remove('hide')
         parent.classList.add('blur')
@@ -81,6 +74,7 @@ function addCard(){
         let itemPopupHeading = document.createElement("h3")
         let inputCenter = document.createElement('center')
         let itemName = document.createElement("input")
+        itemName.placeholder = 'Item Name'
         let buttonSpace = document.createElement('div')
         let addButton = document.createElement("button")
         let closeButton= document.createElement("button")
@@ -104,7 +98,11 @@ function addCard(){
         addButton.innerText = "add"
         closeButton.innerText = "close"
        
-
+        // closeButton.addEventListener('click', function(){
+        //     additemPopup.classList.add('hide')
+        //     parent.classList.remove('blur')
+        // })
+        
 
         addButton.addEventListener('click', ()=>{
             additemPopup.classList.add('hide')
@@ -138,22 +136,30 @@ function addCard(){
         })
     })
 
+    //handle cardheading click
     cardHeading.addEventListener('click' , function(){
+        cardHeading.style.cursor  = 'pointer'
         cardNameHead.classList.remove('hide')
         cardNameHead.innerText = cardHeading.innerText
         singlecard.classList.remove('hide')
         cardcontainer.classList.add('hide')
+        // isSingleCard = true
+
+        //create copy of card
         let copyCard = card.cloneNode(true)
         singlecard.appendChild(copyCard)
+        
+        //to detele card
         copyCard.lastElementChild.addEventListener("click", function(){
             card.remove()
             copyCard.remove()
-            if(cardcontainer.innerText ===''){
+            if(cardcontainer.innerText ===''){      
                 notask.classList.remove('hide')
             }
             back()
         })
-        
+
+        //to add items in cloned card 
         copyCard.lastElementChild.previousElementSibling.addEventListener("click", function(){
             
             additemPopup.classList.remove('hide')
@@ -162,6 +168,7 @@ function addCard(){
             let itemPopupHeading = document.createElement("h3")
             let inputCenter = document.createElement('center')
             let itemName = document.createElement("input")
+            itemName.placeholder = 'Item Name'
             let buttonSpace = document.createElement('div')
             let addButton = document.createElement("button")
             let closeButton= document.createElement("button")
@@ -185,35 +192,57 @@ function addCard(){
             addButton.innerText = "add"
             closeButton.innerText = "close"
             
+            // closeButton.addEventListener('click', function(){
+            //     additemPopup.classList.add('hide')
+            //     parent.classList.remove('blur')
+            // })
+
             addButton.addEventListener('click', ()=>{
                 additemPopup.classList.add('hide')
                 parent.classList.remove('blur')
-    
+        
                 //creating ite elements
                 let item = document.createElement('div')
                 let itemText = document.createElement('span')
                 let markDone = document.createElement('button')
-    
+        
                 //append child
                 item.appendChild(itemText)
                 item.appendChild(markDone)
-    
+        
                 // values
                 itemText.innerText = itemName.value
                 markDone.innerText = "Mark Done"
                 item.style.backgroundColor="white"
-                itemText.style.backgroundColor="white"
+                itemText.classList.add('span1')
                 markDone.classList.add('markdonebutton')
     
                 //appending the item to item list
                 itemList.appendChild(item)
                 additemPopup.innerText =""
-    
+        
                 markDone.addEventListener('click', function(){
                     itemText.classList.add('markDone')
                     markDone.classList.add('hide')
                 })
-    
+                
+                if(singlecard){
+
+                    let itemclone = item.cloneNode(true);
+                    copyCard.appendChild(itemclone);
+
+
+
+                    let markdoneClone = itemclone.querySelector('.markdonebutton');
+                    let itemtextClone = itemclone.querySelector('.span1');
+                
+                    markdoneClone.addEventListener('click', function(){
+                        itemtextClone.classList.add('markDone')
+                        markdoneClone.classList.add('hide')
+                    })
+
+                }
+                
             })           
         })
 
@@ -221,7 +250,6 @@ function addCard(){
         topHead.classList.add('hide')
     })
     
-
 }
 
 function back(){
@@ -232,4 +260,3 @@ function back(){
     cardcontainer.classList.remove('hide')
     singlecard.innerText = ''
 }
-

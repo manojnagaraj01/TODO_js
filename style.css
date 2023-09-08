@@ -145,25 +145,19 @@ h3{
     background-color: white;
 }
 /* card buttons */
-/* .card_buttons{
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    gap: 15px;
-    background-color: peru;
-} */
 .markDone{
     text-decoration: line-through;
     color: red;
 }
-
 .markdonebutton{
     background-color: blue;
     border: none;
     border-radius: 10px;
     margin-left: 10px;
 }
-
+.span1{
+    background-color: white;
+}
 .trashButton{
     background-color: peru;
     margin-top: 50px;
@@ -174,6 +168,16 @@ h3{
     margin-top: 50px;
     margin-left: 130px;
 }
+
 .hide{
     display: none;
+}
+
+@media screen and (max-width: 500px) and (min-width: 250px){
+    .card{
+        margin: 50px 75px;
+    }
+    .box{
+        width: 80%;
+    }
 }
